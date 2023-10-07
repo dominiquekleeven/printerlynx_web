@@ -22,7 +22,6 @@ function toggleCollapsed() {
 }
 
 
-
 </script>
 
 <template>
@@ -31,7 +30,7 @@ function toggleCollapsed() {
       <nav>
         <ul>
           <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span>
-               <span class="link-text"><b>Printerlynx</b></span>
+            <span class="link-text"><b>Printerlynx</b></span>
           </li>
           <hr>
           <li>
@@ -43,7 +42,7 @@ function toggleCollapsed() {
           <li>
             <RouterLink to="/devices">
               <span class="mdi mdi-connection"></span>
-             <span class="link-text">Agents</span>
+              <span class="link-text">Agents</span>
             </RouterLink>
           </li>
           <li>
@@ -55,7 +54,7 @@ function toggleCollapsed() {
           <li>
             <RouterLink to="/files">
               <span class="mdi mdi-folder-multiple"></span>
-             <span class="link-text">Files</span>
+              <span class="link-text">Files</span>
             </RouterLink>
           </li>
 
@@ -80,15 +79,12 @@ function toggleCollapsed() {
           </li>
 
 
-
-
           <li class="bottom">
             <a @click="toggleCollapsed()" href="#">
-              <span :class="collapsed ? 'mdi-arrow-expand-right' : 'mdi-arrow-expand-left' "  class="mdi "></span>
+              <span :class="collapsed ? 'mdi-arrow-expand-right' : 'mdi-arrow-expand-left' " class="mdi "></span>
               <span class="link-text"></span>
             </a>
           </li>
-
 
 
         </ul>

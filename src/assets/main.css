@@ -1,27 +1,28 @@
-/*Pico Overrides*/
+
+body {
+    background: linear-gradient(180deg, #0d1318 0%,
+    rgb(16, 24, 30) 80%,
+    #111a1f 100%);
+}
+
+
 .core {
     display: flex;
     width: 100%;
 }
 
-
 .layout-nav {
     transition: 0.2s;
-    width: 250px;
+    min-width: 250px;
     position: relative;
 }
 
 .layout-nav.collapsed {
-    width: 75px !important;
+    min-width: 75px !important;
 }
 
 .layout-nav .link-text {
     margin-left: 5px;
-}
-
-nav > ul > li {
-    white-space: nowrap !important;
-    overflow: hidden !important;
 }
 
 .layout-nav.collapsed .link-text {
@@ -47,6 +48,33 @@ nav > ul > li {
     height: 100vh
 }
 
+.router-link-active {
+    background-color: var(--primary-focus);
+    color: var(--h3-color) ;
+}
+
+.container.small {
+    max-width: 600px;
+}
+
+
+/*Pico Overrides*/
+
+.container-fluid,
+.container {
+    padding: 20px !important;
+}
+
+
+article {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+nav > ul > li {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
 
 nav a {
     transition: 0.1s;
@@ -56,13 +84,6 @@ nav a {
 nav a:hover {
     color: var(--h3-color);
 }
-
-.nav a:active,
-.router-link-active {
-    background-color: var(--primary-focus);
-    color: var(--h3-color);
-}
-
 
 button {
     padding: 0.65em 1em !important;
@@ -97,9 +118,20 @@ small {
 }
 
 
+nav[aria-label="breadcrumb"] a:hover {
+    background-color: transparent;
+    color: var(--h3-color);
+}
+
+nav[aria-label="breadcrumb"] .router-link-active {
+    background-color: transparent;
+    color: var(--muted-color);
+}
+
+
+
 nav[aria-label="breadcrumb"] > ul > li {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+    padding-top: 0px;
 }
 
 nav .bottom a:focus,
@@ -117,10 +149,6 @@ nav > ul > li {
     font-size: 1em;
 }
 
-
-.container.small {
-    max-width: 600px;
-}
 
 /* Error Article/Card */
 
@@ -161,7 +189,6 @@ summary:hover {
 
 
 /* CSS Animations */
-
 .fadeIn {
     animation: fadeIn 0.5s ease-in-out;
 }

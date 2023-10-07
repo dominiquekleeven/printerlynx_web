@@ -4,7 +4,7 @@ import {RouterLink} from "vue-router";
 </script>
 
 <template>
-  <main class="container-fluid">
+  <main class="container">
     <nav aria-label="breadcrumb">
       <ul>
           <li><RouterLink to="/files">Files</RouterLink></li>

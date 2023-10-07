@@ -1,45 +1,102 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from 'vue-router'
 import {useUserAuthenticationStore} from '@/stores/UserAuthenticationStore'
+import {ref} from "vue";
 
 const userStore = useUserAuthenticationStore()
+
+
+let collapsed = ref(false)
+
+
+function toggleCollapsed() {
+  collapsed.value = !collapsed.value
+  let aside = document.querySelector('aside')
+  if (aside) {
+    if (collapsed.value) {
+      aside.classList.add('collapsed')
+    } else {
+      aside.classList.remove('collapsed')
+    }
+  }
+}
+
+
+
 </script>
 
 <template>
   <div class="core">
-    <aside v-if="userStore.isAuthenticated">
+    <aside class="layout-nav" v-if="userStore.isAuthenticated">
       <nav>
         <ul>
-          <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span><b> Printerlynx</b></li>
+          <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span>
+               <span class="link-text"><b>Printerlynx</b></span>
+          </li>
           <hr>
           <li>
-            <RouterLink to="/dashboard"><span class="mdi mdi-view-dashboard"> Dashboard</span></RouterLink>
+            <RouterLink to="/dashboard">
+              <span class="mdi mdi-view-dashboard"></span>
+              <span class="link-text">Dashboard</span>
+            </RouterLink>
           </li>
           <li>
-            <RouterLink to="/devices"><span class="mdi mdi-connection"> Agents</span></RouterLink>
+            <RouterLink to="/devices">
+              <span class="mdi mdi-connection"></span>
+             <span class="link-text">Agents</span>
+            </RouterLink>
           </li>
           <li>
-            <RouterLink to="/devices"><span class="mdi mdi-printer-3d"> Printers</span></RouterLink>
+            <RouterLink to="/devices">
+              <span class="mdi mdi-printer-3d"></span>
+              <span class="link-text">Printers</span>
+            </RouterLink>
           </li>
           <li>
-            <RouterLink to="/files"><span class="mdi mdi-folder-multiple"> Files</span></RouterLink>
+            <RouterLink to="/files">
+              <span class="mdi mdi-folder-multiple"></span>
+             <span class="link-text">Files</span>
+            </RouterLink>
           </li>
 
           <hr>
           <li>
-            <a href="https://google.com" ><span class="mdi mdi-file-document-multiple"> Documentation</span></a>
+            <a href="https://google.com">
+              <span class="mdi mdi-file-document-multiple"></span>
+              <span class="link-text">Documentation</span>
+            </a>
           </li>
           <li>
-          <RouterLink to="/system"><span class="mdi mdi-server-network"> System</span></RouterLink>
+            <RouterLink to="/system">
+              <span class="mdi mdi-server-network"></span>
+              <span class="link-text">System</span>
+            </RouterLink>
           </li>
 
           <hr>
           <li>
-             <RouterLink to="/account"><span class="mdi mdi-account-settings"> Account</span></RouterLink>
+            <RouterLink to="/account">
+              <span class="mdi mdi-account-settings"></span>
+              <span class="link-text">Account</span></RouterLink>
           </li>
           <li>
-            <a href="#" @click="userStore.logout()"> <span class="mdi mdi-logout-variant"></span> Logout</a>
+            <a href="#" @click="userStore.logout()"> <span class="mdi mdi-logout-variant"></span>
+              <span class="link-text">Logout</span>
+            </a>
           </li>
+
+
+
+
+          <li class="bottom">
+            <a @click="toggleCollapsed()" href="#">
+              <span :class="collapsed ? 'mdi-arrow-expand-right' : 'mdi-arrow-expand-left' "  class="mdi "></span>
+              <span class="link-text"></span>
+            </a>
+          </li>
+
+
+
         </ul>
 
       </nav>

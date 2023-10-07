@@ -1,12 +1,38 @@
 /*Pico Overrides*/
-
 .core {
     display: flex;
     width: 100%;
 }
 
-aside nav {
-    width: 225px;
+
+.layout-nav {
+    transition: 0.2s;
+    width: 250px;
+}
+
+.layout-nav.collapsed {
+    width: 75px !important;
+}
+
+.layout-nav .link-text {
+    margin-left: 5px;
+}
+
+nav > ul > li {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+
+.layout-nav.collapsed .link-text {
+    display: none;
+}
+
+.layout-nav nav .bottom {
+    position: absolute;
+    bottom: 20px;
+}
+
+.layout-nav nav {
     height: 100%;
     padding-top: 25px;
     padding-left: 25px;
@@ -14,13 +40,18 @@ aside nav {
     background-color: var(--card-background-color);
     box-shadow: var(--box-shadow);
 }
-aside {
+
+.layout-nav {
     height: 100vh
 }
+
+
 nav a {
     transition: 0.1s;
+    width: fit-content;
     color: var(--muted-color);
 }
+
 nav a:hover {
     color: var(--h3-color);
 }
@@ -65,12 +96,13 @@ small {
 }
 
 
-nav[aria-label="breadcrumb"] > ul > li
-{
+nav[aria-label="breadcrumb"] > ul > li {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
 
+nav .bottom a:focus,
+nav .bottom a:hover,
 nav summary:focus {
     background-color: transparent !important;
 }

@@ -57,9 +57,9 @@ export const useUserAuthenticationStore = defineStore('user', {
     },
 
 
-    async register(username: string, password: string, passwordConfirmation: string) {
+    async register(username: string, email: string, password: string, passwordConfirmation: string) {
       this.loading = true
-      const response = await userService.register(username, password, passwordConfirmation)
+      const response = await userService.register(username, email, password, passwordConfirmation)
 
       if (response.status === 200) {
         $cookies.cookies.set('token', response.data.token, '1Y');

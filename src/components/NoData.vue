@@ -3,6 +3,7 @@
 defineProps<{
   name: string;
   message: string;
+  button: string;
   page: string;
 }>()
 
@@ -17,7 +18,7 @@ defineProps<{
       <h5>No {{ name }}s</h5>
       <p>{{ message }}</p>
     </main>
-    <router-link role="button" :to="page">Add {{ name.toLowerCase() }}</router-link>
+    <router-link role="button" :to="page">{{ button }}</router-link>
   </section>
 </template>
 

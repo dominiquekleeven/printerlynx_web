@@ -15,10 +15,11 @@ export class UserAuthenticationService {
     }
   }
 
-  public async register(username: string, password: string, passwordConfirmation: string): Promise<AxiosPromise> {
+  public async register(username: string, email: string, password: string, passwordConfirmation: string): Promise<AxiosPromise> {
     try {
       return await axios.post(BASE_URL + '/api/v1/auth/register', {
         username: username,
+        email: email,
         password: password,
         password_confirmation: passwordConfirmation
       });

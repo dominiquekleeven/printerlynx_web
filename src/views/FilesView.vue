@@ -16,7 +16,6 @@ import FileList from '@/components/FileList.vue';
       </header>
 
       <FileList/>
-
     </article>
   </main>
 </template>

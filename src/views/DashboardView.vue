@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DashboardCard from "@/components/DashboardCard.vue";
+import PrinterCard from "@/components/PrinterCard.vue";
 </script>
 
 <template>
   <main class="container-fluid">
-    <DashboardCard/>
+    <PrinterCard/>
   </main>
 </template>

@@ -48,7 +48,6 @@ nav > ul > li {
 
 nav a {
     transition: 0.1s;
-    width: fit-content;
     color: var(--muted-color);
 }
 

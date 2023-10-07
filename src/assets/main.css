@@ -8,6 +8,7 @@
 .layout-nav {
     transition: 0.2s;
     width: 250px;
+    position: relative;
 }
 
 .layout-nav.collapsed {
@@ -30,6 +31,7 @@ nav > ul > li {
 .layout-nav nav .bottom {
     position: absolute;
     bottom: 20px;
+    right: 15px;
 }
 
 .layout-nav nav {

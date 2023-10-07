@@ -76,7 +76,7 @@ function toggleCollapsed() {
           <hr>
           <li>
             <RouterLink to="/account">
-              <span class="mdi mdi-account-settings"></span>
+              <span class="mdi mdi-account"></span>
               <span class="link-text">Account</span></RouterLink>
           </li>
           <li>

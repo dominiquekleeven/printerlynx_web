@@ -1,0 +1,145 @@
+/*Pico Overrides*/
+
+.core {
+    display: flex;
+    width: 100%;
+}
+
+aside nav {
+    width: 225px;
+    height: 100%;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: var(--card-background-color);
+    box-shadow: var(--box-shadow);
+}
+aside {
+    height: 100vh
+}
+nav a {
+    transition: 0.1s;
+    color: var(--muted-color);
+}
+nav a:hover {
+    color: var(--h3-color);
+}
+
+.nav a:active,
+.router-link-active {
+    background-color: var(--primary-focus);
+    color: var(--h3-color);
+}
+
+
+button {
+    padding: 0.65em 1em !important;
+}
+
+a[role="button"] {
+    padding: 0.65em 1em !important;
+}
+
+details[open=""] {
+    padding-bottom: 0 !important;
+}
+
+article a[role="headerbutton"] {
+    position: absolute;
+    right: 0;
+    font-size: 1.75em;
+}
+
+hgroup {
+    margin-bottom: 0 !important;
+    position: relative;
+}
+
+article .lead {
+    margin-bottom: 0 !important;
+}
+
+small {
+    font-size: 14px !important;
+    color: var(--secondary);
+}
+
+
+nav[aria-label="breadcrumb"] > ul > li
+{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+nav summary:focus {
+    background-color: transparent !important;
+}
+
+nav a:hover,
+nav summary:hover {
+    background-color: var(--primary-focus);
+}
+
+nav > ul > li {
+    font-size: 1em;
+}
+
+
+.container.small {
+    max-width: 600px;
+}
+
+/* Error Article/Card */
+
+article.error {
+    padding: 10px;
+    display: flex;
+    background-color: rgba(233, 6, 6, 0.281);
+    margin-bottom: 15px;
+}
+
+article.error ul {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+article.error ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: rgb(211, 153, 153);
+    font-size: 0.9em;
+}
+
+
+input[type="file"] {
+    width: auto !important;
+    cursor: pointer !important;
+}
+
+summary:focus {
+    color: inherit !important;
+}
+
+summary:hover {
+    color: var(--primary-hover) !important;
+}
+
+
+/* CSS Animations */
+
+.fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* FadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

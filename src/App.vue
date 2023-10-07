@@ -66,12 +66,6 @@ function toggleCollapsed() {
               <span class="link-text">Documentation</span>
             </a>
           </li>
-          <li>
-            <RouterLink to="/system">
-              <span class="mdi mdi-server-network"></span>
-              <span class="link-text">System</span>
-            </RouterLink>
-          </li>
 
           <hr>
           <li>

@@ -8,17 +8,13 @@ const userStore = useUserAuthenticationStore()
 
 let collapsed = ref(false)
 
+//auto collapse on tablet/mobile
+if (window.innerWidth < 768) {
+  collapsed.value = true
+}
 
 function toggleCollapsed() {
   collapsed.value = !collapsed.value
-  let aside = document.querySelector('aside')
-  if (aside) {
-    if (collapsed.value) {
-      aside.classList.add('collapsed')
-    } else {
-      aside.classList.remove('collapsed')
-    }
-  }
 }
 
 
@@ -26,7 +22,7 @@ function toggleCollapsed() {
 
 <template>
   <div class="core">
-    <aside class="layout-nav" v-if="userStore.isAuthenticated">
+    <aside :class="collapsed ? 'collapsed' : ''" class="layout-nav" v-if="userStore.isAuthenticated">
       <nav>
         <ul>
           <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span>

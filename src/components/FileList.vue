@@ -1,23 +1,26 @@
 <script setup lang="ts">
 
-
 import {PrintFileService} from "@/services/PrintFileService";
 import NoData from "@/components/NoData.vue";
 import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 
-
 let loading = ref(true)
+let searchInput = ref('')
+
+// all files from api
 let printFiles = ref(Array<PrintFile>())
+// filtered files for search
+let printFilesFiltered = ref(Array<PrintFile>())
 const printFileService = new PrintFileService()
 
 async function getFiles() {
   loading.value = true
   const response = await printFileService.getFiles()
-
   if (response.status === 200) {
     loading.value = false
     printFiles.value = response.data
+    printFilesFiltered.value = response.data
   } else {
     loading.value = false
   }
@@ -32,19 +35,35 @@ function bytes_to_size(bytes: number) {
   return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i]
 }
 
+// search on input change (debounce 100ms)
+function search() {
+  setTimeout(() => {
+    if (searchInput.value.length > 0) {
+      printFilesFiltered.value = printFilesFiltered.value.filter((file: PrintFile) => {
+        return file.name.toLowerCase().includes(searchInput.value.toLowerCase())
+      })
+    } else {
+      printFilesFiltered.value = printFiles.value
+    }
+  }, 100)
+
+}
+
 onMounted(() => {
   getFiles()
 })
-
-
 </script>
 
 <template>
-
   <NoData v-if="printFiles.length < 1 && !loading" name="File" page="/files/upload" button="Upload File"
           message="You haven't uploaded any print files yet"/>
 
-  <figure v-if="printFiles.length > 0 && !loading">
+  <figure v-if="!loading && printFiles.length > 0">
+    <div class="start">
+      <input v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search" id="search" name="search" placeholder="Search for files..">
+    </div>
+
+
     <table role="grid">
       <thead>
       <tr>
@@ -55,13 +74,12 @@ onMounted(() => {
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(file, index) in printFiles">
+      <tr v-for="(file, index) in printFilesFiltered">
         <td>
           <hgroup>
             {{ file.name }}
             <br>
-            <small data-tooltip="SHA-256 checksum"
-                   data-placement="bottom">{{ file.checksum.slice(0, 35) }}...</small>
+            <small data-tooltip="SHA-256 checksum" data-placement="bottom">{{ file.checksum.slice(0, 35) }}...</small>
           </hgroup>
         </td>
         <td>{{ bytes_to_size(file.size) }}</td>
@@ -73,8 +91,6 @@ onMounted(() => {
           </div>
         </td>
       </tr>
-
-
       </tbody>
     </table>
   </figure>

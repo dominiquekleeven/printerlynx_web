@@ -1,16 +1,17 @@
 
-.container-fluid,
-body {
-    background: linear-gradient(180deg, #0d1318 0%,
-    rgb(16, 24, 30) 80%,
-    #111a1f 100%);
-}
-
-
 .core {
     display: flex;
     width: 100%;
 }
+
+.end {
+    float: right;
+}
+
+.start {
+    float: left;
+}
+
 
 .layout-nav {
     transition: 0.2s;
@@ -51,7 +52,7 @@ body {
 
 .router-link-active {
     background-color: var(--primary-focus);
-    color: var(--h3-color) ;
+    color: var(--h3-color);
 }
 
 .container.small {
@@ -60,6 +61,21 @@ body {
 
 
 /*Pico Overrides*/
+
+input {
+    height: 55px !important;
+}
+
+input#search {
+    height: 50px !important;
+}
+
+.container-fluid,
+body {
+    background: linear-gradient(180deg, #0d1318 0%,
+    rgb(16, 24, 30) 80%,
+    #111a1f 100%);
+}
 
 .container-fluid,
 .container {
@@ -128,7 +144,6 @@ nav[aria-label="breadcrumb"] .router-link-active {
     background-color: transparent;
     color: var(--muted-color);
 }
-
 
 
 nav[aria-label="breadcrumb"] > ul > li {

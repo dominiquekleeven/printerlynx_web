@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import FileList from '@/components/FileList.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="container-fluid">

@@ -37,6 +37,7 @@ footer {
 button {
   margin-bottom: 0 !important;
 }
+
 header {
   margin-bottom: 25px;
 }

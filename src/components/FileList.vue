@@ -6,6 +6,7 @@ import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
 import {RouterLink} from "vue-router";
+import {bytes_to_size} from "@/common/util";
 
 let loading = ref(true)
 let searchInput = ref('')
@@ -64,13 +65,6 @@ async function cancelDeleteFile() {
   deletePromptOpen.value = false
 }
 
-
-function bytes_to_size(bytes: number) {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-  if (bytes === 0) return '0 Byte'
-  const i = Math.floor(Math.log(bytes) / Math.log(1024))
-  return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i]
-}
 
 // search on input change (debounce 100ms)
 function search() {

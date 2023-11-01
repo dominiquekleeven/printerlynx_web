@@ -3,6 +3,7 @@ import {RouterLink, useRoute} from "vue-router";
 import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import {PrintFileService} from "@/services/PrintFileService";
+import {bytes_to_size} from "@/common/util";
 
 const route = useRoute()
 let file = ref<PrintFile>()
@@ -16,12 +17,6 @@ onMounted(async () => {
 
 const printFileService = new PrintFileService()
 
-function bytes_to_size(bytes: number) {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-  if (bytes === 0) return '0 Byte'
-  const i = Math.floor(Math.log(bytes) / Math.log(1024))
-  return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i]
-}
 
 async function getFile() {
   if (!id.value) {

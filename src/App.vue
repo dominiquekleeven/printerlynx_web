@@ -36,7 +36,7 @@ function toggleCollapsed() {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/devices">
+            <RouterLink to="/agents">
               <span class="mdi mdi-connection"></span>
               <span class="link-text">Agents</span>
             </RouterLink>

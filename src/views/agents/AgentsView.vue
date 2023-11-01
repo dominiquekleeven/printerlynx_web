@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DashboardCard from "@/components/DashboardCard.vue";
+import AgentCard from "@/components/AgentCard.vue";
 </script>
 
 <template>
   <main class="container-fluid">
-    <DashboardCard/>
+    <router-view></router-view>
   </main>
 </template>

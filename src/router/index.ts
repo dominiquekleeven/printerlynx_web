@@ -3,9 +3,11 @@ import DashboardView from "@/views/DashboardView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import {useUserAuthenticationStore} from '@/stores/UserAuthenticationStore'
 import LoginView from "@/views/LoginView.vue";
-import FilesView from "@/views/FilesView.vue"
-import FilesUploadView from "@/views/FilesUploadView.vue";
-import FilesListView from "@/views/FilesListView.vue";
+import FilesView from "@/views/files/FilesView.vue"
+import FilesUploadView from "@/views/files/FilesUploadView.vue";
+import FilesListView from "@/views/files/FilesListView.vue";
+import AgentsView from "@/views/agents/AgentsView.vue";
+import AgentsListView from "@/views/agents/AgentsListView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +24,18 @@ const router = createRouter({
       component: DashboardView,
       meta: {requiresAuth: true}
 
+    },
+    {
+      path: '/agents',
+      name: 'agents',
+      component: AgentsView,
+      meta: {requiresAuth: true},
+      children: [
+        {
+          path: '', // default child path
+          component: AgentsListView,
+        },
+      ]
     },
     {
       path: '/files',

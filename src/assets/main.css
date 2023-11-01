@@ -120,7 +120,8 @@ details[open=""] {
     padding-bottom: 0 !important;
 }
 
-article a[role="headerbutton"] {
+article hgroup button,
+article hgroup a {
     position: absolute;
     right: 0;
     font-size: 1em;

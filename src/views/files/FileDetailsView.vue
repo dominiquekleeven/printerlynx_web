@@ -42,36 +42,37 @@ async function getFile() {
 </script>
 
 <template>
-    <nav aria-label="breadcrumb">
-      <ul>
-        <li>
-          <RouterLink to="/files/">Files</RouterLink>
-        </li>
-        <li :aria-busy="loading"><span v-if="file">{{ file.name }}</span></li>
-      </ul>
-    </nav>
-    <article>
-      <header>
-        <hgroup>
-          <h3><span class="mdi mdi-file"></span> File Details</h3>
-          <h3><span v-if="file">{{ file.name }}</span></h3>
-        </hgroup>
-      </header>
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li>
+        <RouterLink to="/files/">Files</RouterLink>
+      </li>
+      <li :aria-busy="loading"><span v-if="file">{{ file.name }}</span></li>
+    </ul>
+  </nav>
+  <article>
+    <header>
+      <hgroup>
+        <h3><span class="mdi mdi-file"></span> File Details</h3>
+        <h3 :aria-busy="loading"><span v-if="file">{{ file.name }}</span></h3>
+      </hgroup>
+    </header>
 
-      <ul>
-        <li>
-          <span data-tooltip="File checksum, used to ensure file data integrity" data-placement="top" >Checksum:</span> <span v-if="file">{{ file.checksum }}</span>
-        </li>
-        <li>
-          <span>Size:</span> <span v-if="file">{{ bytes_to_size(file.size) }}</span>
-        </li>
-        <li>
-          <span>Last Modified:</span> <span v-if="file">{{ new Date(file.created_at * 1000).toDateString() }}</span>
-        </li>
+    <ul>
+      <li>
+        <span data-tooltip="File checksum, used to ensure file data integrity" data-placement="top">Checksum: </span>
+        <span v-if="file">{{ file.checksum }}</span>
+      </li>
+      <li>
+        <span>Size: </span><span v-if="file">{{ bytes_to_size(file.size) }}</span>
+      </li>
+      <li>
+        <span>Last Modified: </span><span v-if="file">{{ new Date(file.created_at * 1000).toDateString() }}</span>
+      </li>
 
-      </ul>
+    </ul>
 
-    </article>
+  </article>
 
 </template>
 

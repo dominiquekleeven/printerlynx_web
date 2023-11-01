@@ -6,7 +6,7 @@ import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
 import {RouterLink} from "vue-router";
-import {bytes_to_size} from "@/common/util";
+import {bytes_to_size, epoch_to_date} from "@/common/util";
 
 let loading = ref(true)
 let searchInput = ref('')
@@ -115,7 +115,7 @@ onMounted(() => {
           </hgroup>
         </td>
         <td>{{ bytes_to_size(file.size) }}</td>
-        <td>{{ new Date(file.created_at * 1000).toDateString() }}</td>
+        <td>{{ epoch_to_date(file.created_at) }}</td>
         <td>
           <div class="actions">
             <RouterLink class="primary" role="button" :to="'/files/details/'+ file.uuid"><span

@@ -3,7 +3,7 @@ import {RouterLink, useRoute} from "vue-router";
 import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import {PrintFileService} from "@/services/PrintFileService";
-import {bytes_to_size} from "@/common/util";
+import {bytes_to_size, epoch_to_date} from "@/common/util";
 
 const route = useRoute()
 let file = ref<PrintFile>()
@@ -62,7 +62,7 @@ async function getFile() {
         <span>Size: </span><span v-if="file">{{ bytes_to_size(file.size) }}</span>
       </li>
       <li>
-        <span>Last Modified: </span><span v-if="file">{{ new Date(file.created_at * 1000).toDateString() }}</span>
+        <span>Last Modified: </span><span v-if="file">{{ epoch_to_date(file.created_at) }}</span>
       </li>
 
     </ul>

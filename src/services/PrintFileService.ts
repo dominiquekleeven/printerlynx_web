@@ -25,6 +25,22 @@ export class PrintFileService {
 
   }
 
+  public async getFile(fileUuid: string): Promise<AxiosPromise> {
+    const token = $cookies.cookies.get('token')
+    if (token === undefined || token === null) {
+      return Promise.reject('No token found')
+    }
+    try {
+      return await axios.get(BASE_URL + '/api/v1/files/' + fileUuid, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+    } catch (e: any) {
+      return e;
+    }
+  }
+
 
   public async uploadFile(file: any): Promise<AxiosPromise> {
     const token = $cookies.cookies.get('token')

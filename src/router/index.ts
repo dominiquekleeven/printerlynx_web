@@ -8,6 +8,7 @@ import FilesUploadView from "@/views/files/FilesUploadView.vue";
 import FilesListView from "@/views/files/FilesListView.vue";
 import AgentsView from "@/views/agents/AgentsView.vue";
 import AgentsListView from "@/views/agents/AgentsListView.vue";
+import FileDetailsView from "@/views/files/FileDetailsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,7 +52,10 @@ const router = createRouter({
           path: 'upload',
           component: FilesUploadView,
         },
-
+        {
+          path: 'details/:id',
+          component: FileDetailsView,
+        }
       ]
     },
     {

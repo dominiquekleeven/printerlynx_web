@@ -5,6 +5,7 @@ import NoData from "@/components/NoData.vue";
 import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
+import {RouterLink} from "vue-router";
 
 let loading = ref(true)
 let searchInput = ref('')
@@ -123,7 +124,8 @@ onMounted(() => {
         <td>{{ new Date(file.created_at * 1000).toDateString() }}</td>
         <td>
           <div class="actions">
-            <button class="primary"><span class="mdi mdi-open-in-new"></span></button>
+            <RouterLink class="primary" role="button" :to="'/files/details/'+ file.uuid"><span
+                class="mdi mdi-open-in-new"> </span></RouterLink>
             <button @click="promptDeleteFile(file)" class="secondary"><span class="mdi mdi-trash-can"></span></button>
           </div>
         </td>
@@ -151,14 +153,14 @@ onMounted(() => {
 .actions {
   display: flex;
   gap: 0.5em;
-  justify-content: center;
 }
 
 .actions button {
   padding: 5px !important;
   font-size: 1em;
   margin: 0 !important;
-  width: 100%;
+  width: fit-content;
+  min-width: 65px;
 }
 
 </style>

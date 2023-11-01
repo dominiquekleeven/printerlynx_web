@@ -62,6 +62,12 @@
 
 /*Pico Overrides*/
 
+
+dialog article {
+    min-width: 350px !important;
+    max-width: 600px !important;
+}
+
 input {
     height: 55px !important;
 }

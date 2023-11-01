@@ -4,9 +4,14 @@ import {PrintFileService} from "@/services/PrintFileService";
 import NoData from "@/components/NoData.vue";
 import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
+import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
 
 let loading = ref(true)
 let searchInput = ref('')
+
+let selectedFile = ref<PrintFile>()
+let deletePromptOpen = ref(false)
+
 
 // all files from api
 let printFiles = ref(Array<PrintFile>())
@@ -22,15 +27,46 @@ async function getFiles() {
     printFiles.value = response.data
     printFilesFiltered.value = response.data
   } else {
+    printFiles.value = []
+    printFilesFiltered.value = []
     loading.value = false
   }
 }
 
+async function promptDeleteFile(file: PrintFile) {
+  selectedFile.value = file
+  deletePromptOpen.value = true
+}
+
+async function confirmDeleteFile() {
+  if (!selectedFile.value) {
+    deletePromptOpen.value = false
+    return
+  }
+
+  loading.value = true
+  const response = await printFileService.deleteFile(selectedFile.value?.uuid)
+  if (response.status === 200) {
+    loading.value = false
+    selectedFile.value = undefined
+    deletePromptOpen.value = false
+    await getFiles()
+  } else {
+    selectedFile.value = undefined
+    loading.value = false
+    deletePromptOpen.value = false
+  }
+}
+
+async function cancelDeleteFile() {
+  selectedFile.value = undefined
+  deletePromptOpen.value = false
+}
+
+
 function bytes_to_size(bytes: number) {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
   if (bytes === 0) return '0 Byte'
-
-  // limit to 2 decimal places
   const i = Math.floor(Math.log(bytes) / Math.log(1024))
   return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i]
 }
@@ -55,14 +91,15 @@ onMounted(() => {
 </script>
 
 <template>
+
   <NoData v-if="printFiles.length < 1 && !loading" name="File" page="/files/upload" button="Upload File"
           message="You haven't uploaded any print files yet"/>
 
   <figure v-if="!loading && printFiles.length > 0">
     <div class="start">
-      <input v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search" id="search" name="search" placeholder="Search for files..">
+      <input v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search" id="search" name="search"
+             placeholder="Search for files..">
     </div>
-
 
     <table role="grid">
       <thead>
@@ -86,14 +123,26 @@ onMounted(() => {
         <td>{{ new Date(file.created_at * 1000).toDateString() }}</td>
         <td>
           <div class="actions">
-            <a role="button" href="#" class="primary"> <span class="mdi mdi-open-in-new"></span></a>
-            <a role="button" href="#" class="secondary"> <span class="mdi mdi-trash-can"></span></a>
+            <button class="primary"><span class="mdi mdi-open-in-new"></span></button>
+            <button @click="promptDeleteFile(file)" class="secondary"><span class="mdi mdi-trash-can"></span></button>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </figure>
+
+
+  <confirmation-dialogue v-if="selectedFile" @negative="cancelDeleteFile()" @affirmative="confirmDeleteFile()"
+                         :open="deletePromptOpen"
+                         title="Confirm Delete" negative_text="Cancel" affirmative_text="Confirm">
+    Are you sure you want to delete the following file?
+    <br><br>
+    <i>{{ selectedFile.name }}</i>
+    <br><br>
+    <b>This action cannot be undone.</b>
+  </confirmation-dialogue>
+
 
 </template>
 
@@ -102,11 +151,13 @@ onMounted(() => {
 .actions {
   display: flex;
   gap: 0.5em;
+  justify-content: center;
 }
 
-a[role="button"] {
+.actions button {
   padding: 5px !important;
   font-size: 1em;
+  margin: 0 !important;
   width: 100%;
 }
 

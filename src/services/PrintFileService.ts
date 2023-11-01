@@ -47,5 +47,23 @@ export class PrintFileService {
     }
   }
 
+  public async deleteFile(fileUuid: string): Promise<AxiosPromise> {
+    const token = $cookies.cookies.get('token')
+    if (token === undefined || token === null) {
+      return Promise.reject('No token found')
+    }
+
+    try {
+      return await axios.delete(BASE_URL + '/api/v1/files/' + fileUuid, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+    } catch (e: any) {
+      return e;
+    }
+
+  }
+
 
 }

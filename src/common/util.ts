@@ -9,5 +9,5 @@ export function bytes_to_size(bytes: number) {
 
 export function epoch_to_date(epoch: number) {
   const date = new Date(epoch * 1000)
-  return date.toLocaleDateString()
+  return date.toDateString()
 }

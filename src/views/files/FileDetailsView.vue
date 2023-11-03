@@ -4,18 +4,64 @@ import {onMounted, ref} from "vue";
 import {PrintFile} from "@/types/PrintFile";
 import {PrintFileService} from "@/services/PrintFileService";
 import {bytes_to_size, epoch_to_date} from "@/common/util";
+import * as GCodePreview from "gcode-preview";
+import * as THREE from "three";
 
 const route = useRoute()
 let file = ref<PrintFile>()
+let file_data = ref()
 let loading = ref(false)
+let loading_data = ref(false)
 let id = ref<string>(route.params.id as string)
+let gcodePreview = ref<HTMLCanvasElement>()
+let previewing = ref(true)
 
 // on mounted
 onMounted(async () => {
   await getFile();
+  await getFileData();
 })
 
 const printFileService = new PrintFileService()
+
+
+async function getFileData() {
+  if (!id.value) {
+    return
+  }
+  loading_data.value = true
+
+  const response = await printFileService.getFileDownload(id.value)
+  if (response.status === 200) {
+    loading_data.value = false
+    console.log(response.data)
+    file_data.value = response.data
+    preview_file(response.data)
+  } else {
+    file_data.value = undefined
+    loading_data.value = false
+  }
+}
+
+
+function preview_file(data: string) {
+  const topLayerColor = new THREE.Color(`hsl(180, 50%, 50%)`).getHex();
+  loading_data.value = true
+  let preview = GCodePreview.init({
+    canvas: gcodePreview.value,
+    // @ts-ignore
+    buildVolume: {
+      x: 200,
+      y: 200,
+      z: 200,
+    },
+    initialCameraPosition: [0, 100, 300],
+    topLayerColor,
+  });
+
+  preview.processGCode(data)
+  loading_data.value = false
+}
 
 
 async function getFile() {
@@ -65,10 +111,50 @@ async function getFile() {
         <span>Last Modified: </span><span v-if="file">{{ epoch_to_date(file.created_at) }}</span>
       </li>
 
+      <hr>
+
+
+      <h4 v-if="loading_data">Loading preview..</h4>
+      <h4 v-if="!loading_data">Preview</h4>
+      <div class="gcode-preview" v-show="previewing">
+        <canvas :class="!loading_data ? 'visible' : 'invisible'" ref="gcodePreview"></canvas>
+      </div>
+
     </ul>
 
   </article>
 
 </template>
+
+
+<style scoped>
+
+
+.gcode-preview {
+  width: 750px;
+  height: 100%;
+  border-radius: 5px;
+  border: 2px solid var(--pico-muted-border-color);
+  animation: fadeInRepeat 3s infinite;
+  background-color: var(--pico-card-sectioning-background-color);
+}
+
+canvas {
+  width: 750px;
+  height: 100%;
+  border-radius: 5px;
+  transition: 1s;
+}
+
+.invisible {
+  opacity: 0 !important;
+}
+
+.visible {
+  opacity: 1 !important;
+}
+
+
+</style>
 
 

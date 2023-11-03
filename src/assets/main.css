@@ -1,4 +1,9 @@
 
+
+
+
+
+
 .core {
     display: flex;
     width: 100%;
@@ -85,7 +90,26 @@ input {
 }
 
 input#search {
-    height: 50px !important;
+    height: 55px !important;
+}
+
+form[role="search"] input:focus {
+    box-shadow: none !important;
+
+}
+
+input[type="file"]
+{
+   box-sizing: border-box;
+    height: 75px !important
+}
+
+
+
+
+form[role="search"] input[type="submit"] {
+    padding-top: 10px !important;
+
 }
 
 
@@ -112,12 +136,16 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--pico-h3-color);
+        color: var(--pico-h3-color);
 }
 
 button {
     padding: 0.65em 1em !important;
     width: 100%;
+}
+
+a {
+    text-decoration: none !important;
 }
 
 a[role="button"] {
@@ -210,10 +238,7 @@ th, td {
 }
 
 
-input[type="file"] {
-    width: auto !important;
-    cursor: pointer !important;
-}
+
 
 summary:focus {
     color: inherit !important;

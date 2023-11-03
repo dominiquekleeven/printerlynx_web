@@ -4,6 +4,14 @@
     width: 100%;
 }
 
+.vh-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .end {
     float: right;
 }
@@ -42,8 +50,8 @@
     padding-top: 25px;
     padding-left: 25px;
     padding-right: 25px;
-    background-color: var(--card-background-color);
-    box-shadow: var(--box-shadow);
+    background-color: var(--pico-card-background-color);
+    box-shadow: var(--pico-box-shadow);
 }
 
 .layout-nav {
@@ -51,12 +59,16 @@
 }
 
 .router-link-active {
-    background-color: var(--primary-focus);
-    color: var(--h3-color);
+    background-color: var(--pico-primary-focus);
+    color: var(--pico-h3-color);
 }
 
 .container.small {
-    max-width: 600px;
+    max-width: 700px !important;
+}
+
+.container {
+    max-width: 1060px !important;
 }
 
 
@@ -76,12 +88,7 @@ input#search {
     height: 50px !important;
 }
 
-.container-fluid,
-body {
-    background: linear-gradient(180deg, #0d1318 0%,
-    rgb(16, 24, 30) 80%,
-    #111a1f 100%);
-}
+
 
 .container-fluid,
 .container {
@@ -101,15 +108,16 @@ nav > ul > li {
 
 nav a {
     transition: 0.1s;
-    color: var(--muted-color);
+    color: var(--pico-muted-color);
 }
 
 nav a:hover {
-    color: var(--h3-color);
+    color: var(--pico-h3-color);
 }
 
 button {
     padding: 0.65em 1em !important;
+    width: 100%;
 }
 
 a[role="button"] {
@@ -138,18 +146,18 @@ article .lead {
 
 small {
     font-size: 14px !important;
-    color: var(--secondary);
+    color: var(--pico-secondary);
 }
 
 
 nav[aria-label="breadcrumb"] a:hover {
     background-color: transparent;
-    color: var(--h3-color);
+    color: var(--pico-h3-color);
 }
 
 nav[aria-label="breadcrumb"] .router-link-active {
     background-color: transparent;
-    color: var(--muted-color);
+    color: var(--pico-muted-color);
 }
 
 
@@ -165,7 +173,7 @@ nav summary:focus {
 
 nav a:hover,
 nav summary:hover {
-    background-color: var(--primary-focus);
+    background-color: var(--pico-primary-focus);
 }
 
 nav > ul > li {
@@ -197,6 +205,11 @@ article.error ul li {
 }
 
 
+th, td {
+    background-color: var(--pico-card-background-color) !important;
+}
+
+
 input[type="file"] {
     width: auto !important;
     cursor: pointer !important;
@@ -207,7 +220,7 @@ summary:focus {
 }
 
 summary:hover {
-    color: var(--primary-hover) !important;
+    color: var(--pico-primary-hover) !important;
 }
 
 

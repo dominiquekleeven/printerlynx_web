@@ -52,8 +52,8 @@ section article {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--form-element-background-color);
-  color: var(--muted-color);
+  background-color: var(--pico-form-element-background-color);
+  color: var(--pico-muted-color);
   margin: 0;
 }
 
@@ -61,7 +61,7 @@ section p {
   margin: 0;
   padding: 0;
   max-width: 600px;
-  color: var(--muted-color);
+  color: var(--pico-muted-color);
 }
 
 </style>

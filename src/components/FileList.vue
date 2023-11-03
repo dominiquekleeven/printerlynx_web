@@ -90,7 +90,7 @@ onMounted(() => {
   <NoData v-if="printFiles.length < 1 && !loading" name="File" page="/files/upload" button="Upload File"
           message="You haven't uploaded any print files yet"/>
 
-  <figure v-if="!loading && printFiles.length > 0">
+  <div v-if="!loading && printFiles.length > 0">
     <div class="start">
       <input v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search" id="search" name="search"
              placeholder="Search for files..">
@@ -126,7 +126,7 @@ onMounted(() => {
       </tr>
       </tbody>
     </table>
-  </figure>
+  </div>
 
 
   <confirmation-dialogue v-if="selectedFile" @negative="cancelDeleteFile()" @affirmative="confirmDeleteFile()"

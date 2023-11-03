@@ -1,5 +1,5 @@
 import './assets/main.css'
-import '@picocss/pico'
+import '@picocss/pico/css/pico.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import {createApp} from 'vue'
 import App from './App.vue'

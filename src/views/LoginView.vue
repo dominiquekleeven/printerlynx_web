@@ -25,7 +25,7 @@ function clear() {
 
 </script>
 <template>
-  <main class="container small">
+  <main class="container small vh-center">
     <div>
       <article>
         <header>

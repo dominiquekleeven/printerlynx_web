@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
-    "@picocss/pico": "^1.5.10",
+    "@picocss/pico": "^2.0.0-alpha1",
     "@types/three": "^0.155.1",
     "axios": "^1.5.0",
     "gcode-preview": "^2.9.4",

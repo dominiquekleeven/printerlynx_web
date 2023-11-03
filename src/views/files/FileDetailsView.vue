@@ -48,7 +48,7 @@ async function getFile() {
   <article>
     <header>
       <hgroup>
-        <h3><span class="mdi mdi-file"></span> File Details</h3>
+        <h2><span class="mdi mdi-file"></span> File Details</h2>
         <h3 :aria-busy="loading"><span v-if="file">{{ file.name }}</span></h3>
       </hgroup>
     </header>

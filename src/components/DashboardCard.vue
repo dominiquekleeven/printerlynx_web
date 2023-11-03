@@ -7,7 +7,7 @@ import NoData from "@/components/NoData.vue";
     <article>
       <header>
         <hgroup>
-          <h3><span class="mdi mdi-view-dashboard"></span> Dashboard</h3>
+          <h2><span class="mdi mdi-view-dashboard"></span> Dashboard</h2>
           <h3>Summary of all 3D printers currently linked or connected.</h3>
         </hgroup>
       </header>

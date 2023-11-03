@@ -1,9 +1,4 @@
 
-
-
-
-
-
 .core {
     display: flex;
     width: 100%;
@@ -28,7 +23,7 @@
 
 .layout-nav {
     transition: 0.2s;
-    min-width: 250px;
+    min-width: 275px;
     position: relative;
 }
 
@@ -64,8 +59,7 @@
 }
 
 .router-link-active {
-    background-color: var(--pico-primary-focus);
-    color: var(--pico-h3-color);
+    color: var(--pico-primary) !important;
 }
 
 .container.small {
@@ -98,20 +92,16 @@ form[role="search"] input:focus {
 
 }
 
-input[type="file"]
-{
-   box-sizing: border-box;
+input[type="file"] {
+    box-sizing: border-box;
     height: 75px !important
 }
-
-
 
 
 form[role="search"] input[type="submit"] {
     padding-top: 10px !important;
 
 }
-
 
 
 .container-fluid,
@@ -136,7 +126,7 @@ nav a {
 }
 
 nav a:hover {
-        color: var(--pico-h3-color);
+    color: var(--pico-h3-color);
 }
 
 button {
@@ -183,6 +173,8 @@ nav[aria-label="breadcrumb"] a:hover {
     color: var(--pico-h3-color);
 }
 
+
+
 nav[aria-label="breadcrumb"] .router-link-active {
     background-color: transparent;
     color: var(--pico-muted-color);
@@ -201,7 +193,7 @@ nav summary:focus {
 
 nav a:hover,
 nav summary:hover {
-    background-color: var(--pico-primary-focus);
+   text-decoration: underline !important;
 }
 
 nav > ul > li {
@@ -237,7 +229,9 @@ th, td {
     background-color: var(--pico-card-background-color) !important;
 }
 
-
+th {
+    color: var(--pico-contrast) !important;
+}
 
 
 summary:focus {

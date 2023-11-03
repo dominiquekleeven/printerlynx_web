@@ -21,10 +21,12 @@
 }
 
 
+
 .layout-nav {
     transition: 0.2s;
     min-width: 275px;
     position: relative;
+    border-right: 2px solid var(--pico-muted-border-color);
 }
 
 .layout-nav.collapsed {
@@ -73,6 +75,9 @@
 
 /*Pico Overrides*/
 
+article {
+     border: 2px solid var(--pico-muted-border-color);
+}
 
 dialog article {
     min-width: 350px !important;

@@ -78,7 +78,10 @@ async function onFileChanged(this: any) {
       z: 200,
     },
     initialCameraPosition: [0, 100, 300],
-    topLayerColor,
+    extrusionColor: '#01aaff',
+    backgroundColor: '#1a1f28',
+    topLayerColor: '#ff0000',
+    debug: true,
   });
 
   preview.processGCode(textString)
@@ -119,6 +122,7 @@ async function onFileChanged(this: any) {
 <style scoped>
 canvas {
   border-radius: 5px;
+    border: 2px solid var(--pico-muted-border-color);
   animation: fadeIn 1s forwards;
   width: 100%;
   margin-bottom: 25px;

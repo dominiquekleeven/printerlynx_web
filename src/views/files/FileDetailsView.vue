@@ -45,7 +45,6 @@ async function getFileData() {
 
 
 function preview_file(data: string) {
-  const topLayerColor = new THREE.Color(`hsl(180, 50%, 50%)`).getHex();
   loading_data.value = true
   let preview = GCodePreview.init({
     canvas: gcodePreview.value,
@@ -56,8 +55,13 @@ function preview_file(data: string) {
       z: 200,
     },
     initialCameraPosition: [0, 100, 300],
-    topLayerColor,
+    extrusionColor: '#01aaff',
+    backgroundColor: '#1a1f28',
+    topLayerColor: '#ff0000',
+    debug: true,
   });
+
+
 
   preview.processGCode(data)
   loading_data.value = false
@@ -131,7 +135,7 @@ async function getFile() {
 
 
 .gcode-preview {
-  width: 750px;
+  width: 800px;
   height: 100%;
   border-radius: 5px;
   border: 2px solid var(--pico-muted-border-color);
@@ -140,7 +144,7 @@ async function getFile() {
 }
 
 canvas {
-  width: 750px;
+  width: 800px;
   height: 100%;
   border-radius: 5px;
   transition: 1s;

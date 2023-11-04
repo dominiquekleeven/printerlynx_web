@@ -73,9 +73,9 @@ async function onFileChanged(this: any) {
     canvas: gcodePreview.value,
     // @ts-ignore
     buildVolume: {
-      x: 200,
-      y: 200,
-      z: 200,
+      x: 180,
+      y: 180,
+      z: 180,
     },
     initialCameraPosition: [0, 100, 300],
     extrusionColor: '#01aaff',
@@ -122,7 +122,7 @@ async function onFileChanged(this: any) {
 <style scoped>
 canvas {
   border-radius: 5px;
-    border: 2px solid var(--pico-muted-border-color);
+  border: 2px solid var(--pico-muted-border-color);
   animation: fadeIn 1s forwards;
   width: 100%;
   margin-bottom: 25px;

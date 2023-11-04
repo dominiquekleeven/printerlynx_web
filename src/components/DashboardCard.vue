@@ -12,7 +12,9 @@ import NoData from "@/components/NoData.vue";
         </hgroup>
       </header>
 
-        <NoData name="Printer Agent" message="Set up and link a new printer agent to establish a connection and show the list of currently connected 3D printers." button="Add Printer Agent" page="devices#new"></NoData>
+      <NoData name="Printer Agent"
+              message="Set up and link a new printer agent to establish a connection and show the list of currently connected 3D printers."
+              button="Add Printer Agent" page="devices#new"></NoData>
 
     </article>
   </div>

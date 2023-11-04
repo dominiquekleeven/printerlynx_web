@@ -20,8 +20,6 @@
     float: left;
 }
 
-
-
 .layout-nav {
     transition: 0.2s;
     min-width: 275px;
@@ -64,19 +62,26 @@
     color: var(--pico-primary) !important;
 }
 
-.container.small {
-    max-width: 700px !important;
-}
+
+
+
+
+
+
+
+
+/*Pico Overrides*/
 
 .container {
     max-width: 1060px !important;
 }
 
-
-/*Pico Overrides*/
+.container.small {
+    max-width: 700px !important;
+}
 
 article {
-     border: 2px solid var(--pico-muted-border-color);
+    border: 2px solid var(--pico-muted-border-color);
 }
 
 dialog article {
@@ -179,7 +184,6 @@ nav[aria-label="breadcrumb"] a:hover {
 }
 
 
-
 nav[aria-label="breadcrumb"] .router-link-active {
     background-color: transparent;
     color: var(--pico-muted-color);
@@ -198,7 +202,7 @@ nav summary:focus {
 
 nav a:hover,
 nav summary:hover {
-   text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 nav > ul > li {

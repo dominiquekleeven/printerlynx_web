@@ -3,5 +3,5 @@ import AgentCard from "@/components/AgentCard.vue";
 </script>
 
 <template>
-    <AgentCard/>
+  <AgentCard/>
 </template>

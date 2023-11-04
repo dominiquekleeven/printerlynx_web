@@ -5,7 +5,6 @@ import {PrintFile} from "@/types/PrintFile";
 import {PrintFileService} from "@/services/PrintFileService";
 import {bytes_to_size, epoch_to_date} from "@/common/util";
 import * as GCodePreview from "gcode-preview";
-import * as THREE from "three";
 
 const route = useRoute()
 let file = ref<PrintFile>()
@@ -50,17 +49,16 @@ function preview_file(data: string) {
     canvas: gcodePreview.value,
     // @ts-ignore
     buildVolume: {
-      x: 200,
-      y: 200,
-      z: 200,
+      x: 180,
+      y: 180,
+      z: 180,
     },
-    initialCameraPosition: [0, 100, 300],
+    initialCameraPosition: [400, 250, 0],
     extrusionColor: '#01aaff',
     backgroundColor: '#1a1f28',
     topLayerColor: '#ff0000',
     debug: true,
   });
-
 
 
   preview.processGCode(data)

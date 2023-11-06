@@ -1,3 +1,8 @@
+#app {
+    display: flex;
+    min-height: 100vh;
+}
+
 
 .core {
     display: flex;
@@ -24,6 +29,7 @@
     transition: 0.2s;
     min-width: 275px;
     position: relative;
+    height: 100%;
     border-right: 2px solid var(--pico-muted-border-color);
 }
 
@@ -54,9 +60,6 @@
     box-shadow: var(--pico-box-shadow);
 }
 
-.layout-nav {
-    height: 100vh
-}
 
 .router-link-active {
     color: var(--pico-primary) !important;
@@ -75,7 +78,9 @@
 .container {
     max-width: 1060px !important;
 }
-
+.container-fluid > .container {
+    padding-top: 0 !important;
+}
 .container.small {
     max-width: 700px !important;
 }
@@ -117,6 +122,7 @@ form[role="search"] input[type="submit"] {
 .container-fluid,
 .container {
     padding: 20px !important;
+    padding-bottom: 0 !important;
 }
 
 

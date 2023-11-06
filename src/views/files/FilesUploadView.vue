@@ -4,7 +4,7 @@ import {RouterLink} from "vue-router";
 </script>
 
 <template>
-  <main class="container">
+  <main class="container nopad">
     <nav aria-label="breadcrumb">
       <ul>
         <li>

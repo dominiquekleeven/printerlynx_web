@@ -1,3 +1,11 @@
-### Printerlynx Webinterface
+### Printerlynx Web interface
 
-Unstable - Work in progress.
+Work in progress. Unstable.
+
+----
+
+University project.
+
+----
+
+Once stable, all commits will be squashed.

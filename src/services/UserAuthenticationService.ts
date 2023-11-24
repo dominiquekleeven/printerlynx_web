@@ -30,7 +30,7 @@ export class UserAuthenticationService {
 
   public async getUserInfo(token : string): Promise<AxiosPromise> {
     try {
-      return await axios.get(BASE_URL + '/api/v1/users/info', {
+      return await axios.get(BASE_URL + '/api/v1/accounts/info', {
         headers: {
           'Authorization': 'Bearer ' + token
         }

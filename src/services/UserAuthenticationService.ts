@@ -1,5 +1,5 @@
-import axios from "axios";
 import type {AxiosPromise} from "axios";
+import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
@@ -10,7 +10,7 @@ export class UserAuthenticationService {
         username: username,
         password: password
       });
-    } catch (e : any) {
+    } catch (e: any) {
       return e;
     }
   }
@@ -23,21 +23,20 @@ export class UserAuthenticationService {
         password: password,
         password_confirmation: passwordConfirmation
       });
-    } catch (e : any) {
+    } catch (e: any) {
       return e;
     }
   }
 
-  public async getUserInfo(token : string): Promise<AxiosPromise> {
+  public async getUserInfo(token: string): Promise<AxiosPromise> {
     try {
       return await axios.get(BASE_URL + '/api/v1/accounts/info', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
       });
-    } catch (e : any) {
+    } catch (e: any) {
       return e;
     }
   }
-
 }

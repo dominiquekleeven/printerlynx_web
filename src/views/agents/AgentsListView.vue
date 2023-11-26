@@ -100,7 +100,7 @@ function copyToClipboard(text: string) {
     <article>
       <header>
         <hgroup>
-          <router-link to="/agents/add"><span class="mdi mdi-plus-box-multiple"> Add Agent</span></router-link>
+          <router-link to="/agents/add"><span class="mdi mdi-plus-box"><span>Add agent</span></span></router-link>
           <h2><span class="mdi mdi-connection"></span> Printer Agents</h2>
           <h3>Linked or connected Printer Agents</h3>
         </hgroup>
@@ -113,49 +113,58 @@ function copyToClipboard(text: string) {
 
       <div v-if="!loading && agents.length > 0">
         <div class="start">
-          <input autocomplete="off" v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search" id="search"
+          <input autocomplete="off" v-model="searchInput" @keyup="search()" style="max-width: 400px" type="search"
+                 id="search"
                  name="search"
                  placeholder="Search for agents..">
         </div>
 
-        <table role="grid">
-          <thead>
-          <tr>
-            <th scope="col">Identifier</th>
-            <th scope="col">Description</th>
-            <th scope="col">Connection token</th>
-            <th scope="col">Status</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(agent, index) in agentsFiltered">
-            <td>
-              <hgroup>
-                {{ agent.name }}
-              </hgroup>
-            </td>
-            <td>{{ agent.description }}</td>
-            <td>
-              <div class="sensitive">
-                <input style="margin-bottom: 0" :class="token_visible ? '' : 'pw'" :value="agent.token" readonly>
-                <a :class="copied ? 'mdi mdi-content-copy bounce' : 'mdi mdi-content-copy'" @click="copyToClipboard(agent.token)"></a>
-                <a :class="token_visible ? 'mdi mdi-eye-check ' : 'mdi mdi-eye'" @click="token_visible = !token_visible"></a>
-              </div>
-            </td>
-            <td><span class="negative">Offline</span></td>
-            <td>{{ epoch_to_date(agent.created_at) }}</td>
 
-            <td>
-              <div class="actions">
-                <button @click="promptDeleteAgent(agent)" class="secondary"><span class="mdi mdi-trash-can"></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <figure>
+          <table role="grid">
+            <thead>
+            <tr>
+              <th scope="col">Identifier</th>
+              <th scope="col">Connection token</th>
+              <th scope="col">Status</th>
+              <th scope="col">Created at</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(agent, index) in agentsFiltered">
+              <td style="min-width: 300px">
+                <hgroup>
+                  {{ agent.name }}
+                  <br>
+                  <small>{{ agent.description }}</small>
+                </hgroup>
+              </td>
+              <td>
+                <div class="sensitive">
+                  <input style="margin-bottom: 0" :class="token_visible ? '' : 'pw'" :value="agent.token" readonly>
+                  <a :class="copied ? 'mdi mdi-content-copy bounce' : 'mdi mdi-content-copy'"
+                     @click="copyToClipboard(agent.token)"></a>
+                  <a :class="token_visible ? 'mdi mdi-eye-check ' : 'mdi mdi-eye'"
+                     @click="token_visible = !token_visible"></a>
+                </div>
+              </td>
+              <td><span class="negative">Offline</span></td>
+              <td>{{ epoch_to_date(agent.created_at) }}</td>
+
+              <td>
+                <div class="actions">
+                  <button class="primary"><span class="mdi mdi-pencil"></span></button>
+                  <RouterLink class="primary" role="button" :to="'/agents/details/'+ agent.uuid"><span
+                      class="mdi mdi-open-in-new"> </span></RouterLink>
+                  <button @click="promptDeleteAgent(agent)" class="secondary"><span class="mdi mdi-trash-can"></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </figure>
       </div>
 
     </article>
@@ -168,7 +177,8 @@ function copyToClipboard(text: string) {
     <br><br>
     <i>{{ selectedAgent.name }}</i>
     <br><br>
-    <span class="warning mdi mdi-alert-rhombus"></span> This will disconnect all 3D printers that are linked through this agent. <b>This action cannot be undone.</b>
+    <span class="warning mdi mdi-alert-rhombus"></span> This will disconnect all 3D printers that are linked through
+    this agent. <b>This action cannot be undone.</b>
 
   </confirmation-dialogue>
 
@@ -181,15 +191,9 @@ function copyToClipboard(text: string) {
   flex-direction: row;
   align-items: center;
   gap: 1em;
-  width: 200px;
 }
 
 .sensitive input {
   width: fit-content;
 }
-
-
-
-
-
 </style>

@@ -98,36 +98,39 @@ function search() {
              placeholder="Search for files..">
     </div>
 
-    <table role="grid">
-      <thead>
-      <tr>
-        <th scope="col">File Name</th>
-        <th scope="col">Size</th>
-        <th scope="col">Last Modified</th>
-        <th scope="col">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(file, index) in printFilesFiltered">
-        <td>
-          <hgroup>
-            {{ file.name }}
-            <br>
-            <small data-tooltip="SHA-256 checksum" data-placement="bottom">{{ file.checksum.slice(0, 35) }}...</small>
-          </hgroup>
-        </td>
-        <td>{{ bytes_to_size(file.size) }}</td>
-        <td>{{ epoch_to_date(file.created_at) }}</td>
-        <td>
-          <div class="actions">
-            <RouterLink class="primary" role="button" :to="'/files/details/'+ file.uuid"><span
-                class="mdi mdi-open-in-new"> </span></RouterLink>
-            <button @click="promptDeleteFile(file)" class="secondary"><span class="mdi mdi-trash-can"></span></button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+    <figure>
+      <table role="grid">
+        <thead>
+        <tr>
+          <th scope="col">File Name</th>
+          <th scope="col">Size</th>
+          <th scope="col">Last Modified</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(file, index) in printFilesFiltered">
+          <td>
+            <hgroup>
+              {{ file.name }}
+              <br>
+              <small data-tooltip="SHA-256 checksum" data-placement="bottom">{{ file.checksum.slice(0, 35) }}...</small>
+            </hgroup>
+          </td>
+          <td>{{ bytes_to_size(file.size) }}</td>
+          <td>{{ epoch_to_date(file.created_at) }}</td>
+          <td>
+            <div class="actions">
+              <RouterLink class="primary" role="button" :to="'/files/details/'+ file.uuid"><span
+                  class="mdi mdi-open-in-new"> </span></RouterLink>
+              <button @click="promptDeleteFile(file)" class="secondary"><span class="mdi mdi-trash-can"></span></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </figure>
   </div>
 
 

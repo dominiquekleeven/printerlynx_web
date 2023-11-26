@@ -5,6 +5,35 @@
     --pico-negative: #ee4f5e;
 }
 
+body {
+    overflow-x: scroll !important;
+}
+
+
+article hgroup button,
+article hgroup a {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.5em;
+}
+
+hgroup .mdi > span {
+    display: none;
+}
+
+/*display when above phone width*/
+@media screen and (min-width: 600px) {
+    hgroup .mdi > span {
+        display: inline;
+        margin-left: 0.2em;
+    }
+
+    article hgroup button,
+    article hgroup a {
+        font-size: 1.1em;
+    }
+}
 
 
 #app {
@@ -13,7 +42,7 @@
 }
 
 input.pw {
-  -webkit-text-security: disc;
+    -webkit-text-security: disc;
 }
 
 .core {
@@ -33,9 +62,6 @@ input.pw {
     float: right;
 }
 
-.start {
-    float: left;
-}
 
 .layout-nav {
     transition: 0.2s;
@@ -80,6 +106,14 @@ input.pw {
 
 /*Pico Overrides*/
 
+
+tr td {
+    min-width: 150px;
+}
+
+figure {
+    overflow-y: hidden;
+}
 
 a {
     cursor: pointer;
@@ -174,12 +208,6 @@ details[open=""] {
     padding-bottom: 0 !important;
 }
 
-article hgroup button,
-article hgroup a {
-    position: absolute;
-    right: 0;
-    font-size: 1em;
-}
 
 hgroup {
     margin-bottom: 0 !important;
@@ -301,7 +329,7 @@ summary:hover {
     }
 
     50% {
-           transform: translateY(0);
+        transform: translateY(0);
     }
 
     75% {

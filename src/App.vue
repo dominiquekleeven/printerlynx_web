@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from 'vue-router'
-import {useUserAuthenticationStore} from '@/stores/UserAuthenticationStore'
 import {ref} from "vue";
+import {useAuthenticationStore} from "@/stores/AuthenticationStore";
 
-const userStore = useUserAuthenticationStore()
+const accountStore = useAuthenticationStore()
 
 
 let collapsed = ref(false)
@@ -22,7 +22,7 @@ function toggleCollapsed() {
 
 <template>
   <div class="core">
-    <aside :class="collapsed ? 'collapsed' : ''" class="layout-nav" v-if="userStore.isAuthenticated">
+    <aside :class="collapsed ? 'collapsed' : ''" class="layout-nav" v-if="accountStore.isAuthenticated">
       <nav>
         <ul>
           <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span>
@@ -69,7 +69,7 @@ function toggleCollapsed() {
               <span class="link-text">Account</span></RouterLink>
           </li>
           <li>
-            <a href="#" @click="userStore.logout()"> <span class="mdi mdi-logout-variant"></span>
+            <a href="#" @click="accountStore.logout()"> <span class="mdi mdi-logout-variant"></span>
               <span class="link-text">Logout</span>
             </a>
           </li>

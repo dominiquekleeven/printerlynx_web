@@ -2,22 +2,24 @@ import {defineStore} from 'pinia'
 import {useCookies} from "vue3-cookies";
 import router from "@/router";
 import {useApplicationErrorsStore} from './ApplicationErrorsStore';
-import type {User} from "@/types/User";
-import {UserAuthenticationService} from "@/services/UserAuthenticationService";
+import type {Account} from "@/types/Account";
+import {AuthenticationService} from "@/services/AuthenticationService";
+import {AccountService} from "@/services/AccountService";
 
 // constants
 const $cookies = useCookies()
-const userService = new UserAuthenticationService()
+const authenticationService = new AuthenticationService()
+const accountService = new AccountService()
 
-export const useUserAuthenticationStore = defineStore('user', {
+export const useAuthenticationStore = defineStore('account', {
   state: () => ({
-    user: null as User | null,
+    account: null as Account | null,
     loading: false,
   }),
 
   getters: {
     isAuthenticated: (state) => {
-      return state.user !== null
+      return state.account !== null
     }
   },
 
@@ -37,7 +39,7 @@ export const useUserAuthenticationStore = defineStore('user', {
 
     async login(username: string, password: string) {
       this.loading = true
-      const response = await userService.login(username, password)
+      const response = await authenticationService.login(username, password)
 
       if (response.status === 200) {
         $cookies.cookies.set('token', response.data.token, '1Y');
@@ -52,14 +54,14 @@ export const useUserAuthenticationStore = defineStore('user', {
 
     async logout() {
       $cookies.cookies.remove('token');
-      this.user = null
+      this.account = null
       await router.push('/login');
     },
 
 
     async register(username: string, email: string, password: string, passwordConfirmation: string) {
       this.loading = true
-      const response = await userService.register(username, email, password, passwordConfirmation)
+      const response = await authenticationService.register(username, email, password, passwordConfirmation)
 
       if (response.status === 200) {
         $cookies.cookies.set('token', response.data.token, '1Y');
@@ -72,18 +74,18 @@ export const useUserAuthenticationStore = defineStore('user', {
     },
 
 
-    async userInfo() {
+    async accountInfo() {
       const token = $cookies.cookies.get('token')
       if (token === undefined || token === null) {
         return
       }
       this.loading = true
 
-      const response = await userService.getUserInfo(token)
+      const response = await accountService.getAccountInfo(token)
 
       if (response.status === 200) {
         this.loading = false
-        this.user = response.data
+        this.account = response.data
       } else {
         this.loading = false
       }

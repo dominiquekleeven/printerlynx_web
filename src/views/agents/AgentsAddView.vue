@@ -61,10 +61,10 @@ async function submit(e: { preventDefault: () => void; }) {
         <ErrorCard :errors="errorStore.errors"/>
 
         <label for="name">Identifier</label>
-        <input v-model="name" type="text" id="name" placeholder="A name to identify your agent..."/>
+        <input v-model="name" type="text" id="name" placeholder="A name to identify your agent.."/>
 
         <label for="description">Description</label>
-        <input v-model="description" type="text" id="description" placeholder="A short description, that describes the agent..."/>
+        <input v-model="description" type="text" id="description" placeholder="(Optional) Description for the agent.."/>
 
         <hr>
         <button :aria-busy="loading" type="submit">Add Agent</button>

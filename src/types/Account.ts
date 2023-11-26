@@ -1,4 +1,4 @@
-export class User {
+export class Account {
   uuid: string;
   username: string;
   avatar: string;

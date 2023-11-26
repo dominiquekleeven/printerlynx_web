@@ -3,7 +3,7 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 
-export class UserAuthenticationService {
+export class AuthenticationService {
   public async login(username: string, password: string): Promise<AxiosPromise> {
     try {
       return await axios.post(BASE_URL + '/api/v1/auth/login', {
@@ -28,15 +28,4 @@ export class UserAuthenticationService {
     }
   }
 
-  public async getUserInfo(token: string): Promise<AxiosPromise> {
-    try {
-      return await axios.get(BASE_URL + '/api/v1/accounts/info', {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-    } catch (e: any) {
-      return e;
-    }
-  }
 }

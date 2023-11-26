@@ -17,8 +17,7 @@ const agentService = new AgentService()
 let selectedAgent = ref<Agent>()
 
 let loading = ref(false)
-let token_visible = ref(false)
-
+let visible_tokens = ref(Array<Agent>())
 let copied = ref(false)
 
 
@@ -83,13 +82,30 @@ function search() {
   }, 100)
 }
 
-function copyToClipboard(text: string) {
-  navigator.clipboard.writeText(text)
-  copied.value = true
+function showToken(agent: Agent) {
+  visible_tokens.value.push(agent)
+}
 
-  // reset copied after 3 seconds
+function hideToken(agent: Agent) {
+  visible_tokens.value = visible_tokens.value.filter((a: Agent) => {
+    return a.uuid !== agent.uuid
+  })
+}
+
+function isTokenVisible(agent: Agent) {
+  return visible_tokens.value.some((a: Agent) => {
+    return a.uuid === agent.uuid
+  })
+}
+
+function copyToClipboard(event: any, agent: Agent) {
+  navigator.clipboard.writeText(agent.token)
+  const targetElement = event.target;
+  targetElement.classList.add('bounce')
+
+
   setTimeout(() => {
-    copied.value = false
+    targetElement.classList.remove('bounce')
   }, 700)
 }
 
@@ -142,14 +158,23 @@ function copyToClipboard(text: string) {
               </td>
               <td>
                 <div class="sensitive">
-                  <input style="margin-bottom: 0" :class="token_visible ? '' : 'pw'" :value="agent.token" readonly>
-                  <a :class="copied ? 'mdi mdi-content-copy bounce' : 'mdi mdi-content-copy'"
-                     @click="copyToClipboard(agent.token)"></a>
-                  <a :class="token_visible ? 'mdi mdi-eye-check ' : 'mdi mdi-eye'"
-                     @click="token_visible = !token_visible"></a>
+                  <input style="margin-bottom: 0" :class="isTokenVisible(agent) ? '' : 'pw'" :value="agent.token"
+                         readonly>
+
+                  <a class="mdi mdi-content-copy" @click="copyToClipboard($event, agent)"></a>
+
+                  <a v-if="isTokenVisible(agent)" class="mdi mdi-eye-off" @click="hideToken(agent)"></a>
+                  <a v-if="!isTokenVisible(agent)" class="mdi mdi-eye" @click="showToken(agent)"></a>
+
                 </div>
               </td>
-              <td><span class="negative">Offline</span></td>
+              <td>
+                <div class="neutral">Offline</div>
+                <hr>
+                <small>
+                  <router-link to="/documentation#connection-guide"> Connection guide</router-link>
+                </small>
+              </td>
               <td>{{ epoch_to_date(agent.created_at) }}</td>
 
               <td>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import ErrorCard from "@/components/ErrorCard.vue";
 import {useApplicationErrorsStore} from "@/stores/ApplicationErrorsStore";
-import {useUserAuthenticationStore} from "@/stores/UserAuthenticationStore";
 import {ref} from "vue";
+import {useAuthenticationStore} from "@/stores/AuthenticationStore";
 
-const userStore = useUserAuthenticationStore()
+const accountStore = useAuthenticationStore()
 const errorStore = useApplicationErrorsStore()
 errorStore.clearErrors()
 
@@ -15,7 +15,7 @@ let password = ref('')
 function login(e: { preventDefault: () => void; }): void {
   e.preventDefault()
   errorStore.clearErrors()
-  userStore.login(username.value, password.value)
+  accountStore.login(username.value, password.value)
 }
 
 function clear() {
@@ -43,7 +43,7 @@ function clear() {
           <span>Don't have an account? <router-link @click="clear" to="/register">Click here to
                 register</router-link></span>
           <hr>
-          <button :aria-busy="userStore.loading" type="submit">Login</button>
+          <button :aria-busy="accountStore.loading" type="submit">Login</button>
 
         </form>
       </article>

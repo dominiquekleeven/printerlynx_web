@@ -1,7 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import DashboardView from "@/views/DashboardView.vue";
 import RegisterView from "@/views/RegisterView.vue";
-import {useUserAuthenticationStore} from '@/stores/UserAuthenticationStore'
 import LoginView from "@/views/LoginView.vue";
 import FilesView from "@/views/files/FilesView.vue"
 import FilesUploadView from "@/views/files/FilesUploadView.vue";
@@ -10,6 +9,7 @@ import AgentsView from "@/views/agents/AgentsView.vue";
 import AgentsListView from "@/views/agents/AgentsListView.vue";
 import FileDetailsView from "@/views/files/FileDetailsView.vue";
 import AgentsAddView from "@/views/agents/AgentsAddView.vue";
+import {useAuthenticationStore} from "@/stores/AuthenticationStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -79,15 +79,15 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const userStore = useUserAuthenticationStore()
+  const accountStore = useAuthenticationStore()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const guest = to.matched.some(record => record.meta.guest)
   try {
-    await userStore.userInfo()
+    await accountStore.accountInfo()
   } catch (e) {
     // we don't care about the error here, just that the user is not authenticated
   }
-  const isAuthenticated = userStore.isAuthenticated
+  const isAuthenticated = accountStore.isAuthenticated
   if (requiresAuth && !isAuthenticated) {
     next('/login')
   } else if (guest && isAuthenticated) {

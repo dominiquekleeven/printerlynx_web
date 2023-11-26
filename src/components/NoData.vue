@@ -30,6 +30,7 @@ section {
   align-items: center;
   gap: 1em;
   text-align: center;
+  padding-top: 30px;
 }
 
 section main {

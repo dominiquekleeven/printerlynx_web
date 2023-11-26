@@ -141,7 +141,7 @@ function search() {
     <br><br>
     <i>{{ selectedFile.name }}</i>
     <br><br>
-    <b>This action cannot be undone.</b>
+    <span class="warning mdi mdi-alert-rhombus"></span><b> This action cannot be undone.</b>
   </confirmation-dialogue>
 
 

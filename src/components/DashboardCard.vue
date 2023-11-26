@@ -51,7 +51,7 @@ async function getAgents() {
 
       <div v-if="agents.length > 0">
 
-        <NoData button="Connection Guide" name="3D Printers Found" page="/" message="Please read the connection guide on how to connect your 3D printers." v-if="printers.length < 1"></NoData>
+        <NoData button="Connection Guide" name="3D Printers Found" page="/documentation#connection-guide" message="Please read the connection guide on how to connect your 3D printers." v-if="printers.length < 1"></NoData>
 
       </div>
 

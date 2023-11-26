@@ -1,5 +1,5 @@
 // based on fluent validation @ .NET
 export class ValidationError {
-    status: string;
+    status: any;
     message: string;
 }

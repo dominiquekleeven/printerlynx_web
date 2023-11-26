@@ -16,6 +16,7 @@
     "axios": "^1.5.0",
     "gcode-preview": "^2.9.4",
     "pinia": "^2.1.6",
+    "prettier": "^3.1.0",
     "three": "^0.156.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",

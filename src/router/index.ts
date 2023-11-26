@@ -9,6 +9,7 @@ import FilesListView from "@/views/files/FilesListView.vue";
 import AgentsView from "@/views/agents/AgentsView.vue";
 import AgentsListView from "@/views/agents/AgentsListView.vue";
 import FileDetailsView from "@/views/files/FileDetailsView.vue";
+import AgentsAddView from "@/views/agents/AgentsAddView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +36,10 @@ const router = createRouter({
         {
           path: '', // default child path
           component: AgentsListView,
+        },
+        {
+          path: 'add',
+          component: AgentsAddView,
         },
       ]
     },

@@ -125,13 +125,10 @@ async function getFile() {
     </ul>
 
   </article>
-
 </template>
 
 
 <style scoped>
-
-
 .gcode-preview {
   width: 800px;
   height: 100%;

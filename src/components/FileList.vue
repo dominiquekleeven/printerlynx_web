@@ -10,9 +10,8 @@ import {bytes_to_size, epoch_to_date} from "@/common/util";
 
 let loading = ref(true)
 let searchInput = ref('')
-
-let selectedFile = ref<PrintFile>()
 let deletePromptOpen = ref(false)
+let selectedFile = ref<PrintFile>()
 
 
 // all files from api
@@ -20,6 +19,11 @@ let printFiles = ref(Array<PrintFile>())
 // filtered files for search
 let printFilesFiltered = ref(Array<PrintFile>())
 const printFileService = new PrintFileService()
+
+
+onMounted(() => {
+  getFiles()
+})
 
 async function getFiles() {
   loading.value = true
@@ -38,6 +42,11 @@ async function getFiles() {
 async function promptDeleteFile(file: PrintFile) {
   selectedFile.value = file
   deletePromptOpen.value = true
+}
+
+async function cancelDeleteFile() {
+  selectedFile.value = undefined
+  deletePromptOpen.value = false
 }
 
 async function confirmDeleteFile() {
@@ -60,11 +69,6 @@ async function confirmDeleteFile() {
   }
 }
 
-async function cancelDeleteFile() {
-  selectedFile.value = undefined
-  deletePromptOpen.value = false
-}
-
 
 // search on input change (debounce 100ms)
 function search() {
@@ -80,15 +84,13 @@ function search() {
 
 }
 
-onMounted(() => {
-  getFiles()
-})
+
 </script>
 
 <template>
 
-  <NoData v-if="printFiles.length < 1 && !loading" name="File" page="/files/upload" button="Upload File"
-          message="You haven't uploaded any print files yet"/>
+  <NoData v-if="printFiles.length < 1 && !loading" name="Files" page="/files/upload" button="Upload File"
+          message="You haven't uploaded any print files yet."/>
 
   <div v-if="!loading && printFiles.length > 0">
     <div class="start">
@@ -142,20 +144,4 @@ onMounted(() => {
 
 </template>
 
-<style scoped>
-
-.actions {
-  display: flex;
-  gap: 0.5em;
-}
-
-.actions button {
-  padding: 5px !important;
-  font-size: 1em;
-  margin: 0 !important;
-  width: fit-content;
-  min-width: 65px;
-}
-
-</style>
 

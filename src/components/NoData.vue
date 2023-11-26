@@ -15,7 +15,7 @@ defineProps<{
       <span class="mdi mdi-close"></span>
     </article>
     <main>
-      <h5>No {{ name }}s</h5>
+      <h5>No {{ name }}</h5>
       <p>{{ message }}</p>
     </main>
     <router-link role="button" :to="page">{{ button }}</router-link>
@@ -54,7 +54,7 @@ section article {
   align-items: center;
   background-color: var(--pico-form-element-background-color);
   color: var(--pico-muted-color);
-  margin: 0;
+  margin: 0 !important;
 }
 
 section p {

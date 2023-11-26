@@ -1,8 +1,20 @@
+
+:root {
+    --pico-warning: #ecc965;
+    --pico-positive: #48ce66;
+    --pico-negative: #ee4f5e;
+}
+
+
+
 #app {
     display: flex;
     min-height: 100vh;
 }
 
+input.pw {
+  -webkit-text-security: disc;
+}
 
 .core {
     display: flex;
@@ -68,12 +80,19 @@
 
 /*Pico Overrides*/
 
+
+a {
+    cursor: pointer;
+}
+
 .container {
     max-width: 1060px !important;
 }
+
 .container-fluid > .container {
     padding-top: 0 !important;
 }
+
 .container.small {
     max-width: 700px !important;
 }
@@ -256,6 +275,10 @@ summary:hover {
     animation: fadeIn 0.5s ease-in-out;
 }
 
+.bounce {
+    animation: bounce 0.7s ease-in-out;
+}
+
 /* FadeIn */
 @keyframes fadeIn {
     from {
@@ -268,3 +291,57 @@ summary:hover {
 }
 
 
+@keyframes bounce {
+    0% {
+        transform: translateY(0) scale(1.2);
+    }
+
+    25% {
+        transform: translateY(-7px);
+    }
+
+    50% {
+           transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-3px);
+    }
+
+
+    100% {
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+
+.actions {
+    display: flex;
+    gap: 0.5em;
+}
+
+.actions button {
+    padding: 5px !important;
+    font-size: 1em;
+    margin: 0 !important;
+    width: fit-content;
+    min-width: 65px;
+}
+
+.neutral {
+    color: var(--pico-muted-color) !important;
+}
+
+.positive {
+    color: var(--pico-positive) !important;
+}
+
+.negative {
+    color: var(--pico-negative) !important;
+}
+
+.warning {
+    color: var(--pico-warning) !important;
+}

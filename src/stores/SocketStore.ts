@@ -2,6 +2,9 @@
 import {defineStore} from 'pinia';
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
+const HEARTBEAT_MESSAGE = 'Ping'
+const HEARTBEAT_RESPONSE = 'Pong'
+const HEARTBEAT_INTERVAL = 10000
 
 export const useSocketStore = defineStore('socketStore', {
   state: () => ({
@@ -14,35 +17,37 @@ export const useSocketStore = defineStore('socketStore', {
       return this.socket?.readyState === WebSocket.OPEN;
     },
     connect() {
-      let url = BASE_URL.replace('http', 'ws');
-      url = url.replace('https', 'ws');
-      url = url + '/ws';
-
-      console.log(`WS:Connecting...`)
+      let url = BASE_URL.replace('http', 'ws'); //HTTP
+      url = url.replace('https', 'ws'); //HTTPS
+      url = url + '/ws'; //WEBSOCKET
       this.socket = new WebSocket(url);
 
       this.socket.onopen = () => {
-        console.log(`WS:Connected`)
+        console.info(`WS:Connection OK ✅ - Time: ${new Date().toLocaleTimeString()}`)
+        this.send(HEARTBEAT_MESSAGE)
       };
 
       this.socket.onmessage = (event) => {
-        console.log(`WS:Message: ${event.data}`)
-        this.message = event.data;
+        if (event.data === HEARTBEAT_RESPONSE) {
+          console.info(`WS:Heartbeat 🔄 - Time: ${new Date().toLocaleTimeString()}`)
+        }
+        setTimeout(() => {
+          this.send(HEARTBEAT_MESSAGE)
+        }, HEARTBEAT_INTERVAL)
       };
 
       this.socket.onclose = () => {
-        console.log(`WS:Disconnected`)
+        console.error(`WS:Disconnected`)
       };
 
     },
     disconnect() {
-      console.warn('WS:Disconnecting...')
+      console.info('WS:Disconnecting...')
       this.socket?.close();
     },
     send(message: string) {
       this.socket?.send(message);
     },
-
   },
 });
 

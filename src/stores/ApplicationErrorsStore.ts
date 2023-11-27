@@ -24,3 +24,4 @@ export const useApplicationErrorsStore = defineStore('applicationErrorStore', {
     },
 });
 
+

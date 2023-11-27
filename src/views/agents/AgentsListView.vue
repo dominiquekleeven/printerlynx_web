@@ -6,23 +6,30 @@ import {onMounted, ref} from "vue";
 import {RouterLink} from "vue-router";
 import ConfirmationDialogue from "@/components/ConfirmationDialogue.vue";
 import {epoch_to_date} from "@/common/util";
+import {useSocketStore} from "@/stores/SocketStore";
 
+const agentService = new AgentService()
+const socketStore = useSocketStore()
 
 let searchInput = ref('')
 let deletePromptOpen = ref(false)
 
 let agents = ref(Array<Agent>())
 let agentsFiltered = ref(Array<Agent>())
-const agentService = new AgentService()
 let selectedAgent = ref<Agent>()
 
 let loading = ref(false)
 let visible_tokens = ref(Array<Agent>())
-let copied = ref(false)
 
 
 onMounted(() => {
   getAgents()
+
+  if (!socketStore.isConnected())
+  {
+    socketStore.connect()
+  }
+
 })
 
 async function getAgents() {

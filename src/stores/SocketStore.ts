@@ -4,7 +4,7 @@ import {defineStore} from 'pinia';
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
 const HEARTBEAT_MESSAGE = 'Ping'
 const HEARTBEAT_RESPONSE = 'Pong'
-const HEARTBEAT_INTERVAL = 10000
+const HEARTBEAT_INTERVAL = 5000
 
 export const useSocketStore = defineStore('socketStore', {
   state: () => ({
@@ -22,21 +22,21 @@ export const useSocketStore = defineStore('socketStore', {
       url = url + '/ws'; //WEBSOCKET
       this.socket = new WebSocket(url);
 
+
       this.socket.onopen = () => {
         console.info(`WS:Connection OK ✅ - Time: ${new Date().toLocaleTimeString()}`)
-        this.send(HEARTBEAT_MESSAGE)
+
+        setInterval(() => {
+          this.send(HEARTBEAT_MESSAGE)
+        }, HEARTBEAT_INTERVAL)
       };
 
       this.socket.onmessage = (event) => {
-
         if (event.data === HEARTBEAT_RESPONSE) {
-          console.info(`WS:Heartbeat 🔄 - Time: ${new Date().toLocaleTimeString()}`)
+          console.info(`WS:Heartbeat 🔄 - Timestamp: ${Date.now()}`)
         } else {
           console.info(`WS:Received data: ${event.data}`)
         }
-        setTimeout(() => {
-          this.send(HEARTBEAT_MESSAGE)
-        }, HEARTBEAT_INTERVAL)
       };
 
       this.socket.onclose = () => {

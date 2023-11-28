@@ -28,8 +28,11 @@ export const useSocketStore = defineStore('socketStore', {
       };
 
       this.socket.onmessage = (event) => {
+
         if (event.data === HEARTBEAT_RESPONSE) {
           console.info(`WS:Heartbeat 🔄 - Time: ${new Date().toLocaleTimeString()}`)
+        } else {
+          console.info(`WS:Received data: ${event.data}`)
         }
         setTimeout(() => {
           this.send(HEARTBEAT_MESSAGE)

@@ -2,9 +2,13 @@
 import {defineStore} from 'pinia';
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
+
 const HEARTBEAT_MESSAGE = 'Ping'
 const HEARTBEAT_RESPONSE = 'Pong'
 const HEARTBEAT_INTERVAL = 5000
+
+const MAX_RETRIES = 30
+const RETRY_INTERVAL = 5000
 
 export const useSocketStore = defineStore('socketStore', {
   state: () => ({

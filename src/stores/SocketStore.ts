@@ -13,19 +13,19 @@ const RETRY_INTERVAL = 5000
 export const useSocketStore = defineStore('socketStore', {
   state: () => ({
     socket: null as WebSocket | null,
-    message: '',
-    // We will store a list of agents and their state here and a list of printers and their state
+    message_count: 0,
   }),
   actions: {
+
     isConnected() {
       return this.socket?.readyState === WebSocket.OPEN;
     },
+
     connect() {
       let url = BASE_URL.replace('http', 'ws'); //HTTP
       url = url.replace('https', 'ws'); //HTTPS
       url = url + '/ws'; //WEBSOCKET
       this.socket = new WebSocket(url);
-
 
       this.socket.onopen = () => {
         console.info(`WS:Connection OK ✅ - Time: ${new Date().toLocaleTimeString()}`)
@@ -36,6 +36,8 @@ export const useSocketStore = defineStore('socketStore', {
       };
 
       this.socket.onmessage = (event) => {
+        this.message_count += 1
+
         if (event.data === HEARTBEAT_RESPONSE) {
           console.info(`WS:Heartbeat 🔄 - Timestamp: ${Date.now()}`)
         } else {
@@ -48,10 +50,11 @@ export const useSocketStore = defineStore('socketStore', {
       };
 
     },
+
     disconnect() {
-      console.info('WS:Disconnecting...')
-      this.socket?.close();
+      this.socket?.close()
     },
+
     send(message: string) {
       this.socket?.send(message);
     },

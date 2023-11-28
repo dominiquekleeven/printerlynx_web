@@ -5,11 +5,13 @@ import {useApplicationErrorsStore} from './ApplicationErrorsStore';
 import type {Account} from "@/types/Account";
 import {AuthenticationService} from "@/services/AuthenticationService";
 import {AccountService} from "@/services/AccountService";
+import {useSocketStore} from "@/stores/SocketStore";
 
 // constants
 const $cookies = useCookies()
 const authenticationService = new AuthenticationService()
 const accountService = new AccountService()
+
 
 export const useAuthenticationStore = defineStore('account', {
   state: () => ({
@@ -53,8 +55,13 @@ export const useAuthenticationStore = defineStore('account', {
 
 
     async logout() {
+      const socketStore = useSocketStore()
       $cookies.cookies.remove('token');
       this.account = null
+      if (socketStore.isConnected())
+      {
+        socketStore.disconnect();
+      }
       await router.push('/login');
     },
 

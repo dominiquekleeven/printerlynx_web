@@ -66,7 +66,7 @@ function toggleCollapsed() {
           <li>
             <RouterLink to="/account">
               <span class="mdi mdi-account"></span>
-              <span class="link-text">Account</span></RouterLink>
+              <span style="text-transform: capitalize" class="link-text">{{ accountStore.account?.username }}</span></RouterLink>
           </li>
           <li>
             <a href="#" @click="accountStore.logout()"> <span class="mdi mdi-logout-variant"></span>

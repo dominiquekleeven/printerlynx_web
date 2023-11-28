@@ -16,15 +16,14 @@ export const useSocketStore = defineStore('socketStore', {
     message_count: 0,
   }),
   actions: {
-
     isConnected() {
       return this.socket?.readyState === WebSocket.OPEN;
     },
 
     connect() {
-      let url = BASE_URL.replace('http', 'ws'); //HTTP
-      url = url.replace('https', 'ws'); //HTTPS
-      url = url + '/ws'; //WEBSOCKET
+      let url = BASE_URL.replace('http', 'ws');
+      url = url.replace('https', 'ws');
+      url = url + '/ws';
       this.socket = new WebSocket(url);
 
       this.socket.onopen = () => {

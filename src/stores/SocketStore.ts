@@ -30,9 +30,6 @@ export const useSocketStore = defineStore('socketStore', {
       // on socket open (connection established)
       this.socket.onopen = () => {
         console.info(`WS:Connection OK ✅ - Time: ${new Date().toLocaleTimeString()}`)
-        setInterval(() => {
-          this.send(HEARTBEAT_MESSAGE)
-        }, HEARTBEAT_INTERVAL)
       };
 
       // on socket message

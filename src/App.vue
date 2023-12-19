@@ -26,7 +26,7 @@ function toggleCollapsed() {
       <nav>
         <ul>
           <li><span style="color: #5cdbff" class="mdi mdi-transit-connection-variant"></span>
-            <span class="link-text"><b>Printerlynx</b></span>
+            <span style="color: var(--pico-h1-color)" class="link-text"><b>Printerlynx</b></span>
           </li>
           <hr>
           <li>

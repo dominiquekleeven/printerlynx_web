@@ -5,6 +5,11 @@
     --pico-negative: #ee4f5e;
 }
 
+
+
+
+
+
 body {
     overflow-x: scroll !important;
 }
@@ -135,6 +140,7 @@ a {
 
 article {
     border: 2px solid var(--pico-muted-border-color);
+    background-color: var(--pico-background-color) !important;
 }
 
 dialog article {
@@ -288,7 +294,7 @@ article.error ul li {
 
 
 th, td {
-    background-color: var(--pico-card-background-color) !important;
+
 }
 
 th {

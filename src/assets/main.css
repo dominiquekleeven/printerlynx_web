@@ -274,8 +274,9 @@ nav > ul > li {
 article.error {
     padding: 10px;
     display: flex;
-    background-color: rgba(233, 6, 6, 0.281);
+    background-color: rgba(233, 6, 6, 0.281) !important;
     margin-bottom: 15px;
+    border: none !important;
 }
 
 article.error ul {

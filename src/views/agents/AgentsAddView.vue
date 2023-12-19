@@ -19,21 +19,22 @@ async function submit(e: { preventDefault: () => void; }) {
   e.preventDefault()
   errorStore.clearErrors()
   loading.value = true
-  let response = await agentService.addAgent(name.value, description.value)
 
+  const response = await agentService.addAgent(name.value, description.value)
   if (response.status === 200) {
     loading.value = false
     await router.push('/agents')
   } else {
-    errorStore.addError({
-      message: "Something went wrong while adding the agent, please try again.",
-      status: response.status
-    })
+    if (response.response.data) {
+      errorStore.addError(response.response.data)
+    } else {
+      errorStore.addError({message: 'An unknown error occurred, please try again later', status: 500})
+    }
+
   }
 
   loading.value = false
 }
-
 
 
 </script>
@@ -53,12 +54,9 @@ async function submit(e: { preventDefault: () => void; }) {
       <header>
         <h2 class="lead"><span class="mdi mdi-connection"></span> Add Agent</h2>
       </header>
+      <ErrorCard :errors="errorStore.errors"/>
       <form autocomplete="off" @submit="submit">
 
-
-
-
-        <ErrorCard :errors="errorStore.errors"/>
 
         <label for="name">Identifier</label>
         <input v-model="name" type="text" id="name" placeholder="A name to identify your agent.."/>

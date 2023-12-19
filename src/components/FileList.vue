@@ -113,9 +113,22 @@ function search() {
         <tr v-for="(file, index) in printFilesFiltered">
           <td>
             <hgroup>
-              {{ file.name }}
-              <br>
-              <small data-tooltip="SHA-256 checksum" data-placement="bottom">{{ file.checksum.slice(0, 35) }}...</small>
+
+              <div class="file-name-cell">
+                <div class="file-icon">
+                  <span class="mdi mdi-cube-outline"></span>
+                </div>
+
+                <div>
+                  {{ file.name }}
+                  <br>
+                  <small data-tooltip="SHA-256 checksum" data-placement="bottom">{{
+                      file.checksum.slice(0, 35)
+                    }}...</small>
+                </div>
+              </div>
+
+
             </hgroup>
           </td>
           <td>{{ bytes_to_size(file.size) }}</td>
@@ -146,5 +159,22 @@ function search() {
 
 
 </template>
+
+
+<style scoped>
+
+.file-name-cell {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.file-icon {
+  color: var(--pico-primary);
+  font-size: 2.2em;
+
+}
+
+</style>
 
 

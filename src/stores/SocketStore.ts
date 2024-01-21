@@ -1,11 +1,9 @@
 // errorHandlingStore.js
 import {defineStore} from 'pinia';
+import {useCookies} from "vue3-cookies";
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL
-
-const HEARTBEAT_MESSAGE = 'Ping'
-const HEARTBEAT_RESPONSE = 'Pong'
-const HEARTBEAT_INTERVAL = 5000
+const $cookies = useCookies()
 
 function getWsUrl(): string {
   let url = BASE_URL.replace('http', 'ws');
@@ -14,10 +12,27 @@ function getWsUrl(): string {
   return url
 }
 
+enum WebSocketMessageType {
+    UserAuthentication= 'UserAuthentication',
+    User= 'User',
+    Agent= 'Agent',
+    Printer = 'Printer',
+    Error = 'Error',
+}
+
+class WebSocketMessage {
+  public body: string;
+  public message_type: WebSocketMessageType;
+
+ constructor(body: string, message_type: WebSocketMessageType) {
+   this.body = body;
+   this.message_type = message_type;
+ }
+}
+
 export const useSocketStore = defineStore('socketStore', {
   state: () => ({
     socket: null as WebSocket | null,
-    message_count: 0,
   }),
   actions: {
     isConnected() {
@@ -30,16 +45,17 @@ export const useSocketStore = defineStore('socketStore', {
       // on socket open (connection established)
       this.socket.onopen = () => {
         console.info(`WS:Connection OK ✅ - Time: ${new Date().toLocaleTimeString()}`)
+        console.log('WS:Authentication handshake')
+
+        let token = $cookies.cookies.get('token')
+        const message = new WebSocketMessage(token, WebSocketMessageType.UserAuthentication)
+        this.socket?.send(JSON.stringify(message))
       };
 
       // on socket message
       this.socket.onmessage = (event) => {
-        this.message_count += 1
-        if (event.data === HEARTBEAT_RESPONSE) {
-          console.info(`WS:Heartbeat 🔄 - Timestamp: ${Date.now()}`)
-        } else {
-          console.info(`WS:Received data: ${event.data}`)
-        }
+          console.info(`WS:Received data`)
+          console.log(JSON.parse(event.data))
       };
 
       // on socket close

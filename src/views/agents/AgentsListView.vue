@@ -25,8 +25,7 @@ let visible_tokens = ref(Array<Agent>())
 onMounted(() => {
   getAgents()
 
-  if (!socketStore.isConnected())
-  {
+  if (!socketStore.isConnected()) {
     socketStore.connect()
   }
 
@@ -176,11 +175,16 @@ function copyToClipboard(event: any, agent: Agent) {
                 </div>
               </td>
               <td>
-                <div class="neutral">Offline</div>
-                <hr>
-                <small>
-                  <router-link to="/documentation#connection-guide"> Connection guide</router-link>
-                </small>
+
+                <div v-if="index === 0" class="positive">Online</div>
+                <div v-if="index !== 0" class="neutral">
+                  <div class="neutral">Offline</div>
+                  <hr>
+                  <small>
+                    <router-link to="/documentation#connection-guide"> Connection guide</router-link>
+                  </small>
+                </div>
+
               </td>
               <td>{{ epoch_to_date(agent.created_at) }}</td>
 
